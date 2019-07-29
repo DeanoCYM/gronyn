@@ -28,8 +28,9 @@
 ###
 ###
 
-set -euo pipefail
+set -euxo pipefail
 source "./src/gron_misc.sh"
+
 
 # Generate a unique string to be used for the analysis and ensure that
 # the supplied path to file exists
@@ -55,6 +56,11 @@ cropped_filename="${analysis_dir}/${analysis_uid}.crop.bmp"
 ./script/gron_interactive_crop.m "$bitmap_filename" "$cropped_filename"
 
 # Threshold the image and save a monochrome bitmap
+binary_filename="${analysis_dir}/${analysis_uid}.binary.bmp"
+
+./script/gron_apply_threshold.sh "$cropped_filename" "$binary_filename"
+
+# Perform particle analysis
 
 
 exit 0
