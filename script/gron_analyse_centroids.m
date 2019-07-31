@@ -1,19 +1,19 @@
 #!/bin/octave -qf
 
-### Author: Ellis Rhys Thomas <e.rhys.thomas@gmail.com>
-### Script: gron_interactive_crop.m
-### Date: 31/07/2016
-### Depends: GNU octave (image)
+### Author: Ellis Rhys Thomas
+### Script: gron_analyse_centroids.m
+### Date: 30/07/2019
+### Depends: image
 
 ## This file is part of Gronyn.
 ## 
 ## Copyright (C) 2019 Ellis Rhys Thomas
-##
+## 
 ## Gronyn is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
 ## the Free Software Foundation, either version 3 of the License, or
 ## (at your option) any later version.
-##
+## 
 ## Gronyn is distributed in the hope that it will be useful,
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
 ## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -23,31 +23,33 @@
 ## along with Gronyn.  If not, see <https://www.gnu.org/licenses/>.
 
 ###
-### Description: Interactive cropping tool, crops the file provided as
-### the first paramter and saves it to the file pointed to by the
-### second.
+### Description: Segmentation analysis of particles in a monocrome
+### bitmap image.
 ###
-### Usage: ./gron_interactive_crop INPUT OUTPUT
+### Usage: ./gron_analyse_centroids INPUT OUTPUT
 ###
 ### INPUT   path to greyscale bitmap
 ### OUTPUT  path to write cropped image
-### 
+###
 
+pkg load image;
 addpath("./src/octave/");
-pkg load image
 
-# Retrieve filenames from argv
-filenames = argv ();
+## Process arguements 
+filenames = argv();
 
 if length(filenames) != 2
   printf("ERROR: requires two arguements.");
 endif
 
-original_filename = filenames{1};
-cropped_filename = filenames{2};
+binary_filename = filenames{1};
+results_filename = filenames{2};
 
-# Perform crop 
-printf("Select two points to crop between... \n");
-image = gron_imread(original_filename);
-image = gron_crop(image);
-gron_save_bmp(image, cropped_filename);
+## Import images
+binary_image = gron_imread(binary_filename);
+
+## Centroid analysis
+centroids = gron_centroid(binary_image);
+csvwrite(results_filename, centroids);
+
+## <--- more analysis methods to be added here

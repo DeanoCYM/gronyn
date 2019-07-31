@@ -11,21 +11,22 @@
 ### the Free Software Foundation, either version 3 of the License, or
 ### (at your option) any later version.
 ###
-### libwsepd is distributed in the hope that it will be useful,
+### Gronyn is distributed in the hope that it will be useful,
 ### but WITHOUT ANY WARRANTY; without even the implied warranty of
 ### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ### GNU General Public License for more details.
 ###
 ### You should have received a copy of the GNU General Public License
-### along with libwsepd.  If not, see <https://www.gnu.org/licenses/>.
+### along with Gronyn.  If not, see <https://www.gnu.org/licenses/>.
 ###
 ### Description:
 ###
 ### Miscellaneous bash functions.
 
 # Echos a unique file id based on date in the format YYMMDDHHMMSS
-function gron_uid() {
+function gron_id() {
     date -u +%y%m%d%I%M%S
+    #date -u +%y%m%d%I%M%S
     return 0
 }
 
@@ -37,9 +38,7 @@ function gron_die() {
 
 # Die if file provided by $1 unreadable
 function gron_test_file() {
-    if [[ ! -r $1 ]] ; then
-	gron_die "file $1 is not readable"
-    fi
+    if [[ ! -r $1 ]] ; then return 1 ; fi
     return 0
 }
     
