@@ -32,7 +32,7 @@
 ### Options: -i   Interactive mode (Not yet implemented).
 ###
 
-set -euo pipefail
+set -euxo pipefail
 export PATH="$PATH:./script/"
 source "./src/gron_misc.sh"
 source "./src/gron_magick.sh"
@@ -71,6 +71,7 @@ for micrograph in "$@" ; do
     [ -r "$micrograph" ] || break                 # check readable file
     
     id=$(gron_fm_id "$micrograph")		  # generate uid
+
     gron_fm_create "$id" "$micrograph"		  # start new analysis
     
     gron_interactive_crop.m \
@@ -85,7 +86,10 @@ for micrograph in "$@" ; do
 	$(gron_fm_get "$id" "binary") \
 	$(gron_fm_new "$id" "centroids" ".csv")
     
-    
+    gron_plot_centroids.R \
+	$(gron_fm_get "$id" "cropped") \
+	$(gron_fm_get "$id" "centroids") \
+	$(gron_fm_new "$id" "plot_centroids" ".bmp")
 
 done
 

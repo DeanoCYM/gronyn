@@ -51,5 +51,3 @@ binary_image = gron_imread(binary_filename);
 ## Centroid analysis
 centroids = gron_centroid(binary_image);
 csvwrite(results_filename, centroids);
-
-## <--- more analysis methods to be added here
