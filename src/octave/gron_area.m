@@ -30,7 +30,7 @@
 ### Forge package: image
 ###
 
-function centroids = gron_area(bwimage)
+function area = gron_area(bwimage)
   
   ## particles must be logical 1 for region props.
   bwimage = !bwimage;

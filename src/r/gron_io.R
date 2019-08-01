@@ -1,7 +1,7 @@
 #!/bin/Rscript
 
 ### Author: Ellis Rhys Thomas <e.rhys.thomas@gmail.com>
-### Script: gron_import.R
+### Script: gron_io.R
 ### Date: 30/07/2019
 ### Depends:
 
@@ -46,3 +46,14 @@ gron_loadimage <- function(filename) {
 gron_readcsv <- function(filename, col_names=NULL) {
     return(read.csv(filename, header=FALSE, col.names=col_names));
 }
+
+## gron_writecsv() Export gronyn .csv files ##
+##
+## Parameters:    matrix      various      Tabular data
+##                filename    character    Path to write csv file
+##
+gron_writecsv <- function(matrix, filename) {
+    write.csv(matrix, file=filename);
+    return(0);
+}
+    

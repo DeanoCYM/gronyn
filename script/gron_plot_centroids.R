@@ -33,7 +33,7 @@
 ###
 
 suppressMessages(library("imager"));
-source("./src/r/gron_import.R");
+source("./src/r/gron_io.R");
 
 ## Process arguments
 args = commandArgs(trailingOnly=TRUE)
@@ -51,7 +51,10 @@ bitmap <- gron_loadimage(bmp_filename);
 centroids <- gron_readcsv(centroid_filename, c("x","y"));
 
 ## Plotting
-bmp(filename=out_filename, width=dim(bitmap)[1], height=dim(bitmap)[2]);
+
+## BUG: plot dimensions should be determined from size of picture plus
+## margins
+bmp(filename=out_filename)# width=dim(bitmap)[1], height=dim(bitmap)[2]);
 
 plot(centroids, type="n", xlab="Direction of Deposit Development", ylab="y",
      xlim=c(0, dim(bitmap)[1]), ylim=c(dim(bitmap)[2], 0));

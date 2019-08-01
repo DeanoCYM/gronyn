@@ -96,6 +96,7 @@ function gron_fm_new () {
     newfile="${gron_analysis_dir}/${1}_${2}${3}"
     echo "$newfile" >> "${gron_analysis_dir}/${1}"
     echo "$newfile"
+    mv -b "$newfile" 2>/dev/null || true
     touch "$newfile"
     
     return 0
@@ -115,7 +116,7 @@ function gron_fm_get () {
     [ -n $2 ]                      \
 	|| return 1
 
-    sed -ne "/$2/p" < "${gron_analysis_dir}/${1}"
+    sed -ne "/$2\./p" < "${gron_analysis_dir}/${1}"
 
     return 0
 

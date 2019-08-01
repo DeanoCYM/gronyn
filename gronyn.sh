@@ -89,7 +89,18 @@ for micrograph in "$@" ; do
     gron_plot_centroids.R \
 	$(gron_fm_get "$id" "cropped") \
 	$(gron_fm_get "$id" "centroids") \
-	$(gron_fm_new "$id" "plot_centroids" ".bmp")
+	$(gron_fm_new "$id" "centroidPlot" ".bmp")
+
+    gron_analyse_areas.m \
+	$(gron_fm_get "$id" "binary") \
+	$(gron_fm_new "$id" "areas" ".csv")
+
+    gron_spatstat.R \
+	$(gron_fm_get "$id" "centroids") \
+	$(gron_fm_get "$id" "areas") \
+	$(gron_mk_width $(gron_fm_get "$id" "binary")) \
+	$(gron_mk_height $(gron_fm_get "$id" "binary")) \
+	$(gron_fm_new "$id" "pattern" ".csv")
 
 done
 

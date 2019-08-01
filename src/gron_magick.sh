@@ -62,3 +62,28 @@ function gron_mk_autothreshold () {
     convert "$1" -auto-threshold 'OTSU' "$2"
     return 0
 }
+
+## gron_mk_height() Echo height of image  ##
+#
+# Parameters: $1      Path to target image file
+#
+# Returns:    0       On success
+#             1       Invalid arguements
+function gron_mk_height () {
+    [ $# -eq 1 ] || die "Requires one arguement"
+    identify BSE6000_002.tif 2>/dev/null | awk -F'[ x]' '{ print $3}'
+    return 0;
+}
+
+## gron_mk_height() Echo width of image  ##
+#
+# Parameters: $1      Path to target image file
+#
+# Returns:    0       On success
+#             1       Invalid arguements
+function gron_mk_width () {
+    [ $# -eq 1 ] || die "Requires one arguement"
+    identify BSE6000_002.tif 2>/dev/null | awk -F'[ x]' '{ print $4}'
+    return 0;
+}
+    
