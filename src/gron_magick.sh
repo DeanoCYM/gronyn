@@ -71,7 +71,7 @@ function gron_mk_autothreshold () {
 #             1       Invalid arguements
 function gron_mk_height () {
     [ $# -eq 1 ] || die "Requires one arguement"
-    identify BSE6000_002.tif 2>/dev/null | awk -F'[ x]' '{ print $3}'
+    identify -format '%h' "$1" 2>/dev/null
     return 0;
 }
 
@@ -83,7 +83,7 @@ function gron_mk_height () {
 #             1       Invalid arguements
 function gron_mk_width () {
     [ $# -eq 1 ] || die "Requires one arguement"
-    identify BSE6000_002.tif 2>/dev/null | awk -F'[ x]' '{ print $4}'
+    identify -format '%w' "$1" 2>/dev/null
     return 0;
 }
     
