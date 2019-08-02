@@ -39,6 +39,7 @@ suppressMessages(library("spatstat"));
 source("./src/r/gron_io.R")
 
 ## Process arguments
+print("DEBUG");
 args = commandArgs(trailingOnly=TRUE)
 
 if (length(args) != 5) {
@@ -51,11 +52,6 @@ area_filename      <- as.character(args[2]);
 xmax               <- as.integer(args[3]);
 ymax               <- as.integer(args[4]);
 out                <- as.character(args[5]);
-
-## centroid_filename <- "analysis/19-08-01_c96ad819b77d00f7008ee2dc8450dffb_centroids.csv";
-## area_filename <- "analysis/19-08-01_c96ad819b77d00f7008ee2dc8450dffb_areas.csv";
-## xmax <- 1244;
-## ymax <- 988;
 
 centroid  <- gron_readcsv(centroid_filename, c("x","y"));
 area <- gron_readcsv(area_filename, "x");
@@ -73,4 +69,3 @@ pattern <- ppp(centroid$x, centroid$y, c(0,xmax), c(0,ymax));
 marks(pattern) <- area;
 
 gron_writecsv(pattern, out);
-

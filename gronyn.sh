@@ -32,7 +32,7 @@
 ### Options: -i   Interactive mode (Not yet implemented).
 ###
 
-set -euxo pipefail
+set -euo pipefail
 export PATH="$PATH:./script/"
 source "./src/gron_misc.sh"
 source "./src/gron_magick.sh"
