@@ -49,7 +49,7 @@ if !(scale_in)
 endif
 
 ## Import image (particles must be white!)
-binary = gron_imread(binary_in);
+binary = imread(binary_in);
 
 ## Determine parimeters and write to bitmap
 edges = bwperim(binary);

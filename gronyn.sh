@@ -89,11 +89,6 @@ for micrograph in "$@" ; do
 	$(gron_fm_new "$id" "edges" ".bmp") \
 	$(gron_fm_new "$id" "regionprops" ".csv")
     
-    # gron_plot_centroids.R \
-    # 	$(gron_fm_get "$id" "binary") \
-    # 	$(gron_fm_get "$id" "centroids") \
-    # 	$(gron_fm_new "$id" "centroidPlot" ".bmp")
-
     # gron_spatstat.R \
     # 	$(gron_fm_get "$id" "centroids") \
     # 	$(gron_fm_get "$id" "areas") \
