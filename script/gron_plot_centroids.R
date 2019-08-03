@@ -47,18 +47,22 @@ bmp_filename           <- as.character(args[1]);
 centroid_filename      <- as.character(args[2]);
 out_filename           <- as.character(args[3]);
 
-## Load the required files
+## Load the required files ## 
 bitmap <- gron_loadimage(bmp_filename);
 centroids <- gron_readcsv(centroid_filename, c("x","y"));
 
 xmax <- as.integer(dim(bitmap)[1]);
 ymax <- as.integer(dim(bitmap)[2]);
 
-## Plotting
+## Plotting ## 
 gron_startplot(xmax, ymax, out_filename, 200);
 
+## plot with origin at top left
 plot(centroids, type="n",
-     xlab="Direction of Deposit Development")
+     xlab="Direction of Deposit Development", ylim=c(ymax,0), bty="n");
+
+## ybottom is actually at top of graph because axis is flipped with
+## plot(ylim) in previous command
 rasterImage(bitmap,
             xleft=0, xright=dim(bitmap)[1],
             ytop=0, ybottom=dim(bitmap)[2]);

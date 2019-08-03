@@ -26,6 +26,7 @@
 ### Description: R plotting functions for R
 ###  
 
+## Start a plot (
 gron_startplot <- function(width, height, filename, marginsize = 0) {
 
     ## Plot environment must be size of bitmap + size of margins
@@ -35,7 +36,7 @@ gron_startplot <- function(width, height, filename, marginsize = 0) {
         width = width+marginsize, height = height+marginsize,
         units="px", res = ppi);
     
-    par(xaxs="i", yaxs="i", pin=dim(bitmap)[c(1,2)]/ppi);
+    par(xaxs="i", yaxs="i", pin= c(width,height) / ppi);
 
 }
     
