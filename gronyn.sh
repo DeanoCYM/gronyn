@@ -95,12 +95,18 @@ for micrograph in "$@" ; do
 	$(gron_fm_get "$id" "binary") \
 	$(gron_fm_new "$id" "areas" ".csv")
 
+    gron_analyse_equivalent.m \
+	$(gron_fm_get "$id" "binary") \
+	$(gron_fm_new "$id" "equivalent" ".csv")
+
     gron_spatstat.R \
 	$(gron_fm_get "$id" "centroids") \
 	$(gron_fm_get "$id" "areas") \
 	$(gron_mk_width $(gron_fm_get "$id" "binary")) \
 	$(gron_mk_height $(gron_fm_get "$id" "binary")) \
 	$(gron_fm_new "$id" "pattern" ".csv")
+
+    
 
 done
 
