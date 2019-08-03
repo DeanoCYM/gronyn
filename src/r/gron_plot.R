@@ -26,7 +26,7 @@
 ### Description: R plotting functions for R
 ###  
 
-## Start a plot (
+## Start a raster graphics plot
 gron_startplot <- function(width, height, filename, marginsize = 0) {
 
     ## Plot environment must be size of bitmap + size of margins

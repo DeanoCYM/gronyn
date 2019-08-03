@@ -1,7 +1,7 @@
 #!/bin/octave -qf
 
 ### Author: Ellis Rhys Thomas
-### Script: gron_analyse_equivalent.m
+### Script: gron_csvwrite.m
 ### Date: 30/07/2019
 ### Depends: image
 
@@ -23,33 +23,19 @@
 ## along with Gronyn.  If not, see <https://www.gnu.org/licenses/>.
 
 ###
-### Description: Area equivalent diameter of particles in a monocrome
-### bitmap image.
+### Description: Write csv file with headers
 ###
-### Usage: ./gron_analyse_equivalent INPUT OUTPUT
+### Usage: gron_csvwrite(DATA, HEADERS, FILENAME)
 ###
-### INPUT   path to binary bitmap
-### OUTPUT  path to write csv of particle diameters 
+### DATA      2D matrix of data to be written to FILENAME
+### HEADERS   Cell with same length as DATA containing header strings
+### FILENAME  Path to write csv file
 ###
 
-pkg load image;
-addpath("./src/octave/");
+function gron_csvwrite(data, headers, filename)
+  fid = fopen(filename, "w");
+  fprintf(fid, "%s\n", strjoin(headers, ","));
+  dlmwrite(fid, data, "delimiter", ",", "newline", "unix");
+  fclose(fid);
+end
 
-## Process arguements 
-filenames = argv();
-
-if length(filenames) != 2
-  printf("ERROR: requires two arguements.");
-endif
-
-binary_filename = filenames{1};
-results_filename = filenames{2};
-
-## Import images
-binary_image = gron_imread(binary_filename);
-
-## Centroid analysis
-equivalent = gron_equivalent(binary_image);
-csvwrite(results_filename, equivalent);
-
-## <--- more analysis methods to be added here

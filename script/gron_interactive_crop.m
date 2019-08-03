@@ -50,4 +50,4 @@ cropped_filename = filenames{2};
 printf("Select two points to crop between... \n");
 image = gron_imread(original_filename);
 image = gron_crop(image);
-gron_save_bmp(image, cropped_filename);
+imwrite(image, cropped_filename);

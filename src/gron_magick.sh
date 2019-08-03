@@ -59,7 +59,7 @@ function gron_mk_autothreshold () {
     [ -r "$2" ]     \
 	    || return 1
 
-    convert "$1" -auto-threshold 'OTSU' "$2"
+    convert "$1" -auto-threshold 'OTSU' -negate "$2"
     return 0
 }
 

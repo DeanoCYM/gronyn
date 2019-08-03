@@ -32,7 +32,7 @@
 ### Options: -i   Interactive mode (Not yet implemented).
 ###
 
-set -euo pipefail
+set -euxo pipefail
 export PATH="$PATH:./script/"
 source "./src/gron_misc.sh"
 source "./src/gron_magick.sh"
@@ -46,6 +46,7 @@ function gron_usage () {
 
 ## Analysis directory to save results
 gron_analysis_dir=$(realpath "./analysis")
+scale=33.7			# px/um
 
 ## Process arguements
 while getopts ":ih" opt ; do
@@ -82,31 +83,23 @@ for micrograph in "$@" ; do
 	$(gron_fm_get "$id" "cropped") \
 	$(gron_fm_new "$id" "binary" ".bmp")
 
-    gron_analyse_centroids.m \
+    gron_regionprops.m \
+	"$scale" \
 	$(gron_fm_get "$id" "binary") \
-	$(gron_fm_new "$id" "centroids" ".csv")
+	$(gron_fm_new "$id" "edges" ".bmp") \
+	$(gron_fm_new "$id" "regionprops" ".csv")
     
-    gron_plot_centroids.R \
-	$(gron_fm_get "$id" "binary") \
-	$(gron_fm_get "$id" "centroids") \
-	$(gron_fm_new "$id" "centroidPlot" ".bmp")
+    # gron_plot_centroids.R \
+    # 	$(gron_fm_get "$id" "binary") \
+    # 	$(gron_fm_get "$id" "centroids") \
+    # 	$(gron_fm_new "$id" "centroidPlot" ".bmp")
 
-    gron_analyse_areas.m \
-	$(gron_fm_get "$id" "binary") \
-	$(gron_fm_new "$id" "areas" ".csv")
-
-    gron_analyse_equivalent.m \
-	$(gron_fm_get "$id" "binary") \
-	$(gron_fm_new "$id" "equivalent" ".csv")
-
-    gron_spatstat.R \
-	$(gron_fm_get "$id" "centroids") \
-	$(gron_fm_get "$id" "areas") \
-	$(gron_mk_width $(gron_fm_get "$id" "binary")) \
-	$(gron_mk_height $(gron_fm_get "$id" "binary")) \
-	$(gron_fm_new "$id" "pattern" ".csv")
-
-    
+    # gron_spatstat.R \
+    # 	$(gron_fm_get "$id" "centroids") \
+    # 	$(gron_fm_get "$id" "areas") \
+    # 	$(gron_mk_width $(gron_fm_get "$id" "binary")) \
+    # 	$(gron_mk_height $(gron_fm_get "$id" "binary")) \
+    # 	$(gron_fm_new "$id" "pattern" ".csv")
 
 done
 
