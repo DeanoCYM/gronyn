@@ -55,7 +55,7 @@ xmax <- as.integer(dim(bitmap)[1]);
 ymax <- as.integer(dim(bitmap)[2]);
 
 ## Plotting
-gron_startplot(xmax, ymax, out_filename);
+gron_startplot(xmax, ymax, out_filename, 200);
 
 plot(centroids, type="n",
      xlab="Direction of Deposit Development")
