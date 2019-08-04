@@ -51,9 +51,9 @@ endif
 ## Import image (particles must be white!)
 binary = imread(binary_in) >= 1;
 
-## Determine parimeters and write to bitmap
+## Determine parimeters and write to bitmap as 8bit so that R can read
 edges = bwperim(binary);
-imwrite(edges, edges_out);
+imwrite(uint8(edges) * 255, edges_out);
 
 ## Determine region properties
 prop_names = { "Area", "Centroid", "EquivDiameter" };
