@@ -39,12 +39,11 @@ gron_loadimage <- function(filename) {
 ## gron_readcsv() Import gronyn .csv files ##
 ##
 ## Parameters:    filename    character    Path to csv file
-##                col_names   list         List of column names or NULL
 ##
 ## Returns:                   list         Imported csv file
 ## 
-gron_readcsv <- function(filename, col_names=NULL) {
-    return(read.csv(filename, header=FALSE, col.names=col_names));
+gron_readcsv <- function(filename) {
+    return(read.csv(filename, header=TRUE));
 }
 
 ## gron_writecsv() Export gronyn .csv files ##
