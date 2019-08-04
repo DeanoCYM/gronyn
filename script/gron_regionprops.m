@@ -49,7 +49,7 @@ if !(scale_in)
 endif
 
 ## Import image (particles must be white!)
-binary = imread(binary_in);
+binary = imread(binary_in) >= 1;
 
 ## Determine parimeters and write to bitmap
 edges = bwperim(binary);
@@ -57,6 +57,7 @@ imwrite(edges, edges_out);
 
 ## Determine region properties
 prop_names = { "Area", "Centroid", "EquivDiameter" };
+
 s = regionprops(binary, prop_names);
 
 ## Format region properites from list into table
